@@ -18,7 +18,7 @@ contract EmgToken is ERC721, Ownable {
     // A function that allows users to purchase tokens at a dynamic price
     function buyToken() public payable {
         uint256 tokenId = _nextTokenId;
-        
+
         // Pricing formula: 1. Token = 0.1 ETH, 2. Token = 0.2 ETH...
         uint256 expectedPrice = 0.1 ether;
         require(msg.value == expectedPrice, "Yanlis ETH miktari gonderildi");
@@ -27,16 +27,14 @@ contract EmgToken is ERC721, Ownable {
         _safeMint(msg.sender, tokenId);
     }
 
-    // A function that produces a JSON metadata link automatically 
+    // A function that produces a JSON metadata link automatically
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         // Check if the token exists
         _requireOwned(tokenId);
 
         // Modern string birleştirme (abi.encodePacked kullanmıyoruz!)
         return string.concat(
-            "ipfs://bafybeiev4uxmlobx6dwp6656s7l2k6jspi4py5zibw567qslsdgevlznfq/", 
-            Strings.toString(tokenId), 
-            ".json"
+            "ipfs://bafybeiev4uxmlobx6dwp6656s7l2k6jspi4py5zibw567qslsdgevlznfq/", Strings.toString(tokenId), ".json"
         );
     }
 }
