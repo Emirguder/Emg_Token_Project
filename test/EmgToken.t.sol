@@ -70,13 +70,13 @@ contract EmgTokenTest is Test {
 
     // 6. constant price test: Does the price remain constant at 0.1 ETH for each token?
     function test_BuyTokenFixedPrice() public {
-        vm.deal(user1, 1 ether);
+        vm.deal(user, 1 ether);
         vm.deal(user2, 1 ether);
 
         // 1. user buying (ID: 0)
-        vm.prank(user1);
+        vm.prank(user);
         token.buyToken{value: 0.1 ether}();
-        assertEq(token.ownerOf(0), user1);
+        assertEq(token.ownerOf(0), user);
 
         // 2. user buying (ID: 1). Price remains constant, still 0.1 ETH!
         vm.prank(user2);
